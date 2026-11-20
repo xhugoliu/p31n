@@ -1,0 +1,4 @@
+/.build/
+/dist/
+/boards/shields/p31n/p31n-local-macros.dtsi
+.DS_Store

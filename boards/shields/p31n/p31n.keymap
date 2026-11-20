@@ -1,0 +1,195 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#define ZMK_POINTING_DEFAULT_MOVE_VAL 1200
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/keys.h>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/outputs.h>
+#include <dt-bindings/zmk/ext_power.h>
+#include <dt-bindings/zmk/mouse.h>
+
+&lt {
+    tapping-term-ms = <175>;
+};
+
+&mt {
+    tapping-term-ms = <175>;
+};
+
+/ {
+#include "p31n-macros.dtsi"
+
+    quote_pair: quote_pair {
+        compatible = "zmk,behavior-macro";
+        #binding-cells = <0>;
+        bindings = <&kp LS(SQT) &kp LS(SQT) &kp LEFT>;
+        wait-ms = <1>;
+        tap-ms = <1>;
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        combo_wo {
+            timeout-ms = <50>;
+            key-positions = <1 8>;
+            bindings = <&kp LG(SPACE)>;
+            layers = <0>;
+        };
+
+        combo_ei {
+            timeout-ms = <50>;
+            key-positions = <2 7>;
+            bindings = <&kp LC(SPACE)>;
+            layers = <0>;
+        };
+
+        combo_ru {
+            timeout-ms = <50>;
+            key-positions = <3 6>;
+            bindings = <&kp LG(SEMI)>;
+            layers = <0>;
+        };
+
+        combo_ty {
+            timeout-ms = <50>;
+            key-positions = <4 5>;
+            bindings = <&m6>;
+            layers = <0>;
+        };
+
+        combo_qp {
+            timeout-ms = <50>;
+            key-positions = <0 9>;
+            bindings = <&m10>;
+            layers = <0>;
+        };
+
+        combo_bn {
+            timeout-ms = <50>;
+            key-positions = <24 26>;
+            bindings = <&kp SPACE>;
+            layers = <0>;
+        };
+
+        combo_gh_quotes {
+            timeout-ms = <50>;
+            key-positions = <14 15>;
+            bindings = <&quote_pair>;
+            layers = <0>;
+        };
+
+        // macOS screenshots: hold each listed pair together to trigger.
+        combo_fj_screenshot {
+            timeout-ms = <50>;
+            key-positions = <13 16>;
+            bindings = <&screenshot_region>;
+            layers = <0>;
+        };
+
+        combo_dk_screenshot {
+            timeout-ms = <50>;
+            key-positions = <12 17>;
+            bindings = <&screenshot_window>;
+            layers = <0>;
+        };
+
+        combo_sl_screenshot {
+            timeout-ms = <50>;
+            key-positions = <11 18>;
+            bindings = <&screenshot_toolbar>;
+            layers = <0>;
+        };
+
+        combo_a_semicolon_mission_control {
+            timeout-ms = <50>;
+            key-positions = <10 19>;
+            bindings = <&kp LC(UP)>;
+            layers = <0>;
+        };
+
+    };
+
+    keymap0: keymap {
+        compatible = "zmk,keymap";
+
+        // Central key locks/unlocks layers 1-7 after momentary entry.
+        // The default layer retains the momentary system-layer shortcut.
+        default_layer {
+            bindings = <
+            &mt LALT Q   &mt LGUI W    &mt LSHFT E    &mt LCTRL R    &mt LALT T        &mt RALT Y     &mt RCTRL U    &mt RSHFT I     &mt RGUI O    &mt RALT P
+            &mt LALT A   &mt LGUI S    &mt LSHFT D    &mt LCTRL F    &mt LALT G        &mt RALT H     &mt RCTRL J    &mt RSHFT K     &mt RGUI L    &mt RALT SEMI
+            &lt 2 Z      &lt 7 X       &lt 1 C        &lt 5 V        &lt 2 B    &mo 8        &lt 3 N       &lt 6 M       &lt 4 COMMA     &lt 7 DOT    &lt 3 SLASH
+            >;
+        };
+
+        fn1_layer {
+            bindings = <
+            &kp LALT     &kp LGUI      &kp LSHFT      &kp LCTRL      &kp LALT          &kp KP_PLUS    &kp N7         &kp N8          &kp N9        &kp KP_ASTERISK
+            &kp LALT     &kp LGUI      &kp LSHFT      &kp LCTRL      &kp LALT          &kp KP_MINUS   &kp N4         &kp N5          &kp N6        &kp KP_SLASH
+            &none        &none         &none          &none          &none     &tog 1  &kp N0        &kp N1         &kp N2          &kp N3        &kp KP_DOT
+            >;
+        };
+
+        fn2_layer {
+            bindings = <
+            &kp LALT     &kp LGUI      &kp LSHFT      &kp LCTRL      &kp LALT          &msc SCRL_UP   &kp PG_UP      &mmv MOVE_UP    &kp HOME      &msc SCRL_LEFT
+            &mkp MB5     &mkp MB4      &mkp MCLK      &mkp RCLK      &mkp LCLK         &kp LC(LS(TAB)) &mmv MOVE_LEFT &kp LG(W)       &mmv MOVE_RIGHT &kp LC(TAB)
+            &mkp MB5     &mkp MB4      &mkp MCLK      &mkp RCLK      &mkp LCLK &tog 2  &msc SCRL_DOWN &kp PG_DN      &mmv MOVE_DOWN  &kp END       &msc SCRL_RIGHT
+            >;
+        };
+
+        fn3_layer {
+            bindings = <
+            &kp HOME     &none         &kp UP         &none          &kp PG_UP         &kp RALT       &kp RCTRL      &kp RSHFT       &kp RGUI      &kp RALT
+            &none        &kp LEFT      &none          &kp RIGHT      &none             &kp RALT       &kp RCTRL      &kp RSHFT       &kp RGUI      &kp RALT
+            &kp END      &none         &kp DOWN       &none          &kp PG_DN &tog 3  &none          &none          &none           &none         &none
+            >;
+        };
+
+        fn4_layer {
+            bindings = <
+            &kp F1       &kp F2        &kp F3         &kp F4         &kp F5            &kp RALT       &kp RCTRL      &kp RSHFT       &kp RGUI      &kp RALT
+            &kp F6       &kp F7        &kp F8         &kp F9         &kp F10           &kp LG(F16)    &kp LG(F17)    &kp LG(F18)     &kp LG(F19)   &kp LG(F20)
+            &kp F11      &kp F12       &kp F13        &kp F14        &kp F15   &tog 4  &kp LG(F21)    &kp LG(F22)    &none          &kp LG(F23)   &kp LG(F24)
+            >;
+        };
+
+        fn5_layer {
+            bindings = <
+            &kp LALT &kp LGUI &kp LSHFT &kp LCTRL &kp LALT &none &kp BSPC &kp ENTER &kp DEL &none
+            &kp LALT &kp LGUI &kp LSHFT &kp LCTRL &kp LALT &none &kp LBKT &kp RBKT &kp BSLH &none
+            &none &none &none &none &none &tog 5 &none &kp BSPC &kp ENTER &kp DEL &none
+            >;
+        };
+
+        fn6_layer {
+            bindings = <
+            &none &kp ESC   &kp GRAVE &kp TAB   &none &kp RALT &kp RCTRL &kp RSHFT &kp RGUI &kp RALT
+            &none &kp SQT   &kp MINUS &kp EQUAL &none &kp RALT &kp RCTRL &kp RSHFT &kp RGUI &kp RALT
+            &none &kp ESC   &kp GRAVE &kp TAB   &none &tog 6 &none &none &none &none &none
+            >;
+        };
+
+        fn7_layer {
+            bindings = <
+            &m1 &m2 &m3 &m4 &m5 &none &kp C_REWIND &kp C_PP &kp C_FF &none
+            &none &kp C_BRI_DN &kp PSCRN &kp C_BRI_UP &none &none &kp C_VOL_DN &kp C_MUTE &kp C_VOL_UP &none
+            &none &none &none &none &none &tog 7 &none &none &none &none &none
+            >;
+        };
+
+        fn8_layer {
+            bindings = <
+            &bt BT_SEL 0 &bt BT_SEL 1 &bt BT_SEL 2 &bt BT_SEL 3 &bt BT_SEL 4 &out OUT_BLE &out OUT_USB &bt BT_CLR &bootloader &none
+            &none &none &none &none &none &none &none &none &none &none
+            &none &none &none &none &none &none &none &none &none &none &none
+            >;
+        };
+    };
+};

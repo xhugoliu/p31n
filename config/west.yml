@@ -1,0 +1,48 @@
+# P31n build dependencies from the pinned ZMK and Zephyr manifests.
+manifest:
+  projects:
+    - name: zmk
+      url: https://github.com/zmkfirmware/zmk
+      revision: 904c9aec8822d79149d42c8a9a77e8828eb08f5a
+      clone-depth: 1
+    - name: zephyr
+      url: https://github.com/zmkfirmware/zephyr
+      revision: 10ba6d0cb38bc3d258775d27982f707599320085
+      clone-depth: 1
+    - name: zmk-studio-messages
+      url: https://github.com/zmkfirmware/zmk-studio-messages
+      revision: 6cb4c283e76209d59c45fbcb218800cd19e9339d
+      clone-depth: 1
+      path: modules/msgs/zmk-studio-messages
+    - name: cmsis
+      url: https://github.com/zephyrproject-rtos/cmsis
+      revision: d1b8b20b6278615b00e136374540eb1c00dcabe7
+      clone-depth: 1
+      path: modules/hal/cmsis
+    - name: hal_nordic
+      url: https://github.com/zephyrproject-rtos/hal_nordic
+      revision: 37ca068d7b013fb65a2acc9306bffa48a3e72839
+      clone-depth: 1
+      path: modules/hal/nordic
+    - name: nanopb
+      url: https://github.com/zephyrproject-rtos/nanopb
+      revision: 7307ce399b81ddcb3c3a5dc862c52d4754328d38
+      clone-depth: 1
+      path: modules/lib/nanopb
+    - name: mbedtls
+      url: https://github.com/zephyrproject-rtos/mbedtls
+      revision: 4952e1328529ee549d412b498ea71c54f30aa3b1
+      clone-depth: 1
+      path: modules/crypto/mbedtls
+    - name: picolibc
+      url: https://github.com/zephyrproject-rtos/picolibc
+      revision: 82d62ed1ac55b4e34a12d0390aced2dc9af13fc9
+      clone-depth: 1
+      path: modules/lib/picolibc
+    - name: segger
+      url: https://github.com/zephyrproject-rtos/segger
+      revision: cf56b1d9c80f81a26e2ac5727c9cf177116a4692
+      clone-depth: 1
+      path: modules/debug/segger
+  self:
+    path: config
