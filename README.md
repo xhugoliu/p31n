@@ -23,6 +23,12 @@ age -d -i ~/.config/p31n/age-key.txt -o p31n-personal.uf2 p31n-personal.uf2.age
 
 可以在任何装有 age 的设备上解密，把 `-i` 改为你的私钥路径即可。
 
+## 换电脑
+
+- 公开版直接从 Actions 下载 ZIP，解压后按下文刷机。如果产物已过期，仓库维护者可以重新运行 `public` 构建。
+- 个人版在新电脑安装 [age](https://github.com/FiloSottile/age#installation)，从备份恢复 age 私钥。当前 Mac 的默认路径是 `~/.config/p31n/age-key.txt`。继续使用同一个 GitHub 仓库即可，构建时会读取 `firmware` 环境里已有的宏 Secret。
+- 如果丢失私钥，按下文生成新密钥并提交替换后的公钥，再运行一次 `personal`。已有的加密产物仍需要原私钥。
+
 ## 配置个人版
 
 初次配置或迁移到自己的仓库时，生成 age 密钥，将公钥写入 `.github/p31n-age-recipients.txt` 并提交。私钥保存在仓库外并自行备份。
@@ -44,8 +50,8 @@ base64 < /path/to/p31n-local-macros.dtsi | tr -d '\n' |
 
 ## 刷机
 
-1. 用 USB 连接 P31n，按住底排中央 1.5u 键，再按顶排 O 位置进入 bootloader。
-2. 把 `.uf2` 拖进新出现的 `NICENANO` 磁盘，等待键盘自动重启。macOS 命令行可用 `cp -X p31n-public.uf2 /Volumes/NICENANO/`，刷个人版时替换文件名。
+1. 用 USB 连接 P31n，按住底排中央 1.5u 键，再按顶排 O 位置进入 bootloader。如果组合键不可用，按 [X.Tips 的说明](https://github.com/X-Tips/ZMK-Keyboard/tree/main/p31n)打开后盖，快速短接 Reset 和 GND 两次。
+2. 把 `.uf2` 拖进新出现的 `NICENANO` 磁盘。写入完成后，磁盘会消失，键盘会重启为 `X.P31n Keyboard`。macOS 命令行可用 `cp -X p31n-public.uf2 /Volumes/NICENANO/`，刷个人版时替换文件名。
 3. 如果键盘曾通过 ZMK Studio 保存键位，且希望恢复为固件里的键位，在 Studio 中重置键位设置。
 
 有本地 ZMK 工具链时，也可以直接运行 `./scripts/build.sh public`，产物位于 `dist/`。
