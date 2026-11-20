@@ -3,8 +3,14 @@
 X.Tips P31n 的独立固件仓库。键位迁自 [ZMK-Keyboard 的 `334a632`](https://github.com/xhugoliu/ZMK-Keyboard/commit/334a632752b5630e106b55c85fee9d2239b1a93a)，硬件定义来自 [X.Tips](https://github.com/X-Tips/ZMK-Keyboard/tree/main/p31n)。
 
 - 改键位和并击组合时编辑 [p31n.keymap](boards/shields/p31n/p31n.keymap)。
-- 改固件选项时编辑 [p31n.conf](boards/shields/p31n/p31n.conf)。当前支持 USB、蓝牙、鼠标层和 ZMK Studio，按键遥测默认关闭。
+- 改固件选项时编辑 [p31n.conf](boards/shields/p31n/p31n.conf)。当前支持 USB、蓝牙、鼠标层和 ZMK Studio。
 - [West 清单](config/west.yml)固定 ZMK、Zephyr 和 P31n 构建所需模块的提交。工作流固定 ZMK 的构建容器，构建时自动拉取依赖。
+
+## 蓝牙遥测
+
+配套 macOS 应用可通过蓝牙采集物理按键事件，查看按键次数、时长和热力图。[P31n Insight](https://github.com/xhugoliu/p31n-insight)
+
+固件默认关闭遥测。使用 Insight 前，将 `p31n.conf` 中的 `CONFIG_P31N_TELEMETRY` 改为 `y`，再按下文构建并刷机。[遥测模块](modules/p31n-telemetry)
 
 ## 云端构建
 
