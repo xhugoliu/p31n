@@ -42,9 +42,14 @@ jobs:
         run: |
           tool_dir=$(mktemp -d)
           cd "$tool_dir"
-          curl --fail --silent --show-error --location --retry 3 \
-            https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz \
-            --output age.tar.gz
+          python3 - <<'PY'
+          from pathlib import Path
+          from urllib.request import urlopen
+
+          url = "https://github.com/FiloSottile/age/releases/download/v1.3.2/age-v1.3.2-linux-amd64.tar.gz"
+          with urlopen(url, timeout=30) as response:
+              Path("age.tar.gz").write_bytes(response.read())
+          PY
           echo 'cbe24006683f8eb669266162894b9a522a1af52f2665fbc63a4bb032ed26ac10  age.tar.gz' | sha256sum --check
           tar -xzf age.tar.gz age/age
           echo "$tool_dir/age" >> "$GITHUB_PATH"

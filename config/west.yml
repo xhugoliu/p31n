@@ -9,6 +9,7 @@ manifest:
       url: https://github.com/zmkfirmware/zephyr
       revision: 10ba6d0cb38bc3d258775d27982f707599320085
       clone-depth: 1
+      west-commands: scripts/west-commands.yml
     - name: zmk-studio-messages
       url: https://github.com/zmkfirmware/zmk-studio-messages
       revision: 6cb4c283e76209d59c45fbcb218800cd19e9339d
